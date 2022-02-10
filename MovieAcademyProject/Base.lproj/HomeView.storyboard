@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lhb-5v-E4B">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="WSn-4m-Ehz">
+            <objects>
+                <navigationController id="Lhb-5v-E4B" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="q4H-od-FZ1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LaQ-PQ-wwy" kind="relationship" relationship="rootViewController" id="BEr-Pt-Ixv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3X-kx-wzg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="171"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="a7E-05-HrX">
+            <objects>
+                <viewController id="LaQ-PQ-wwy" customClass="HomeViewController" customModule="MovieAcademyProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oEq-uE-fGi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hb1-TE-ncy" customClass="MovieCollectionView" customModule="MovieAcademyProject" customModuleProvider="target">
+                                <rect key="frame" x="20" y="128" width="374" height="694"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vyf-Qh-dpz">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Jne-l1-4iR" customClass="MovieCollectionCell" customModule="MovieAcademyProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ywy-44-bXS">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="LaQ-PQ-wwy" id="903-Sa-zkm"/>
+                                    <outlet property="delegate" destination="LaQ-PQ-wwy" id="XVY-Wn-1Y2"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Kf-y9-WCy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1Kf-y9-WCy" firstAttribute="bottom" secondItem="Hb1-TE-ncy" secondAttribute="bottom" constant="40" id="TQZ-Dg-rgQ"/>
+                            <constraint firstItem="Hb1-TE-ncy" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" constant="20" id="Y2R-6U-0nX"/>
+                            <constraint firstItem="1Kf-y9-WCy" firstAttribute="trailing" secondItem="Hb1-TE-ncy" secondAttribute="trailing" constant="20" id="a8X-AO-Rz9"/>
+                            <constraint firstItem="Hb1-TE-ncy" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" constant="40" id="gtU-b9-Hft"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mB9-Yo-bqx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nng-L0-fXb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1794" y="171"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

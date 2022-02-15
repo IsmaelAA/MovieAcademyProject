@@ -8,14 +8,32 @@
 import Foundation
 import UIKit
 
-class MovieCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
+class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.dataSource = self
+        self.delegate = self
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 20
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return MovieCollectionCell()
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kCollectionCell", for: indexPath) as! MovieCollectionCell
+        
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 2
+        
+        return cell
+
     }
-    
+
 
 }

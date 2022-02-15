@@ -10,4 +10,5 @@ import UIKit
 
 class MovieCollectionCell : UICollectionViewCell{
     
+    @IBOutlet weak var movieLabel: UILabel!
 }

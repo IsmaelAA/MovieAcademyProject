@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281077C427BBBED50038DABE /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C327BBBED50038DABE /* UserDefaultsWorker.swift */; };
+		281077C627BBBF220038DABE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C527BBBF220038DABE /* APIService.swift */; };
+		281077C827BBD6C30038DABE /* FavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C727BBD6C30038DABE /* FavButton.swift */; };
 		28DE54D027B3C51B0093095D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54CF27B3C51B0093095D /* AppDelegate.swift */; };
 		28DE54D227B3C51B0093095D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54D127B3C51B0093095D /* SceneDelegate.swift */; };
 		28DE54D427B3C51B0093095D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54D327B3C51B0093095D /* HomeViewController.swift */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		281077C327BBBED50038DABE /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
+		281077C527BBBF220038DABE /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		281077C727BBD6C30038DABE /* FavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavButton.swift; sourceTree = "<group>"; };
 		28DE54CC27B3C51B0093095D /* MovieAcademyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieAcademyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DE54CF27B3C51B0093095D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28DE54D127B3C51B0093095D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		281077C227BBBEC10038DABE /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				281077C327BBBED50038DABE /* UserDefaultsWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
 		28DE54C327B3C51B0093095D = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +131,7 @@
 		28DE54CE27B3C51B0093095D /* MovieAcademyProject */ = {
 			isa = PBXGroup;
 			children = (
+				281077C227BBBEC10038DABE /* Workers */,
 				28F67DC527B51E370068F687 /* ViewModels */,
 				28F67DC327B51D5B0068F687 /* CollectionViews */,
 				28F67DBC27B51A280068F687 /* Controllers */,
@@ -128,6 +143,8 @@
 				28DE54D827B3C51D0093095D /* Assets.xcassets */,
 				28DE54DA27B3C51D0093095D /* LaunchScreen.storyboard */,
 				28DE54DD27B3C51D0093095D /* Info.plist */,
+				281077C527BBBF220038DABE /* APIService.swift */,
+				281077C727BBD6C30038DABE /* FavButton.swift */,
 			);
 			path = MovieAcademyProject;
 			sourceTree = "<group>";
@@ -330,11 +347,14 @@
 				28F67DB927B519F70068F687 /* MovieModel.swift in Sources */,
 				28F67DC727B51E4F0068F687 /* HomeViewModel.swift in Sources */,
 				28F67DBB27B51A150068F687 /* MovieCollectionCell.swift in Sources */,
+				281077C427BBBED50038DABE /* UserDefaultsWorker.swift in Sources */,
 				28DE54D427B3C51B0093095D /* HomeViewController.swift in Sources */,
 				28F67DC227B51B660068F687 /* MovieCollectionView.swift in Sources */,
 				28F67DC027B51A520068F687 /* FavMoviesViewController.swift in Sources */,
 				28F67DC927B51E6E0068F687 /* MovieDetailViewModel.swift in Sources */,
+				281077C627BBBF220038DABE /* APIService.swift in Sources */,
 				28DE54D027B3C51B0093095D /* AppDelegate.swift in Sources */,
+				281077C827BBD6C30038DABE /* FavButton.swift in Sources */,
 				28F67DBE27B51A410068F687 /* MovieDetailViewController.swift in Sources */,
 				28DE54D227B3C51B0093095D /* SceneDelegate.swift in Sources */,
 			);
@@ -520,7 +540,7 @@
 				INFOPLIST_FILE = MovieAcademyProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = HomeView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -548,7 +568,7 @@
 				INFOPLIST_FILE = MovieAcademyProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = HomeView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Equatable {
     let primartyTitle: String
     let titleType: String
     let score: Double

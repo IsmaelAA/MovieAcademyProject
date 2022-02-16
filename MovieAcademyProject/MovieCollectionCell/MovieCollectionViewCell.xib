@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,16 +28,17 @@
                         <color key="tintColor" systemColor="linkColor"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-CD-xwf" customClass="FavButton" customModule="MovieAcademyProject">
-                        <rect key="frame" x="150" y="0.0" width="50" height="50"/>
+                        <rect key="frame" x="150" y="-0.5" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="CCt-eP-quh"/>
                             <constraint firstAttribute="width" constant="50" id="ixE-bq-HJ3"/>
                         </constraints>
-                        <color key="tintColor" systemColor="labelColor"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain">
-                            <imageReference key="image" image="star" catalog="system" renderingMode="original"/>
-                        </buttonConfiguration>
+                        <color key="tintColor" systemColor="systemYellowColor"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" backgroundImage="star" catalog="system"/>
+                        <connections>
+                            <action selector="favButtonPressed:" destination="JqP-3h-0SE" eventType="touchUpInside" id="ibd-hN-Ro2"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -57,17 +57,22 @@
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="83" height="73"/>
+            <connections>
+                <outlet property="favButton" destination="aZY-CD-xwf" id="e19-zj-Cgm"/>
+                <outlet property="movieImage" destination="Hb4-8e-S0l" id="Ltc-3j-b3u"/>
+                <outlet property="movieLabel" destination="pgl-l6-9bq" id="Gzo-CT-RzG"/>
+            </connections>
             <point key="canvasLocation" x="1.4492753623188408" y="30.803571428571427"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="film" catalog="system" width="128" height="93"/>
         <image name="star" catalog="system" width="128" height="116"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

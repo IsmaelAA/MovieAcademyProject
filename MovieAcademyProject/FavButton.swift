@@ -9,18 +9,16 @@ import Foundation
 import UIKit
 
 public class FavButton: UIButton {
-    private let offset = CGFloat(2.0) // 2 point
 
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    var favButPressed = false
 
-        self.imageView?.contentMode = .scaleAspectFit
-    }
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        favButPressed = !favButPressed
 
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-
-        let edge = bounds.height / 3 - offset
-        self.imageEdgeInsets = UIEdgeInsets(top: edge, left: 0, bottom: edge, right: 0)
+        if(favButPressed) {
+            setBackgroundImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            setBackgroundImage(UIImage(systemName: "star"), for: .normal)
+        }
     }
 }

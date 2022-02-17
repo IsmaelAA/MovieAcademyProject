@@ -13,21 +13,22 @@ protocol APIServiceProtocol {
 
 class APIService: APIServiceProtocol {
 
-
     var task: URLSessionDataTask?
 
     func getMoviesByTitle(title: String, genre: String, type: String, year: String, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?) {
         task?.cancel()
-        var urlComponents = URLComponents()
+        var urlComponents = URLComponents(string: "http://localhost:8080/search")
 
-        // localhost:8080/search?query=spiderman&genre=Action&type=Movie,tvEpisode&year=2000/2001,2008/2015"
+//        "localhost:8080/search?query=spiderman&genre=Action&type=Movie,tvEpisode&year=2000/2001,2008/2015"
 
-        urlComponents.scheme = "https"
-        urlComponents.host = "localhost:8080"
-        urlComponents.path = "/search"
-        urlComponents.queryItems = [URLQueryItem.init(name: "query", value: "spiderman"), URLQueryItem.init(name: "genre", value: "Action"), URLQueryItem.init(name: "type", value: "Movie"), URLQueryItem.init(name: "year", value: "2000/2001")]
+//        urlComponents.scheme = "https"
+//        urlComponents.host = "localhost:8080"
+//        urlComponents.path = "/search"
 
-        guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
+        urlComponents?.queryItems = [URLQueryItem.init(name: "query", value: title), URLQueryItem.init(name: "rows", value: "50")]
+//                                     , URLQueryItem.init(name: "genre", value: genre), URLQueryItem.init(name: "type", value: type), URLQueryItem.init(name: "year", value: year)]
+
+        guard let url = urlComponents?.url else { fatalError("Could not create URL from components") }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
@@ -56,8 +57,6 @@ class APIService: APIServiceProtocol {
                 onError?(error)
             }
         }
-
         task?.resume()
     }
-
 }

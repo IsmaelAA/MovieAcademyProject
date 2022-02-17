@@ -13,8 +13,14 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieLabel: UILabel!
     @IBOutlet weak var favButton: FavButton!
-    
+
     override func prepareForReuse() {
         favButton.setBackgroundImage(UIImage(systemName: "star"), for: .normal)
+    }
+
+    func loadMovie(movieToLoad: Movie) {
+        movieLabel.text = movieToLoad.primaryTitle
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 2
     }
 }

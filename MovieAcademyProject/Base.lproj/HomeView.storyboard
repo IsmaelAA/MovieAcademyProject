@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="3719" y="-165"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Academy Movies-->
         <scene sceneID="a7E-05-HrX">
             <objects>
                 <viewController id="LaQ-PQ-wwy" customClass="HomeViewController" customModule="MovieAcademyProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,7 +34,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu">
+                            <searchBar contentMode="redraw" placeholder="Something new?" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu" customClass="MovieSearchBar" customModule="MovieAcademyProject">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -71,9 +71,9 @@
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="jGm-Ug-6Xn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mB9-Yo-bqx"/>
+                    <navigationItem key="navigationItem" title="Academy Movies" id="mB9-Yo-bqx"/>
                     <connections>
-                        <outlet property="homeSearchBar" destination="tKA-l1-tEu" id="gXj-Gn-90K"/>
+                        <outlet property="homeSearchBar" destination="tKA-l1-tEu" id="xSh-3U-wOV"/>
                         <outlet property="movieCollectionView" destination="Hb1-TE-ncy" id="7S9-X4-B2M"/>
                     </connections>
                 </viewController>
@@ -88,12 +88,57 @@
                     <view key="view" contentMode="scaleToFill" id="6Uk-Fi-e9Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKL-Av-bw1" customClass="MovieCollectionView" customModule="MovieAcademyProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="eMo-uE-rut">
+                                    <size key="itemSize" width="175" height="175"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="kCollectionCell" id="bql-QI-oUp" customClass="MovieCollectionCell" customModule="MovieAcademyProject" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="0.0" width="175" height="175"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SMe-IQ-6gN">
+                                            <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="upS-AH-h1P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="9EG-VP-IPl"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="trailing" secondItem="upS-AH-h1P" secondAttribute="trailing" id="K5N-et-KeR"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="top" secondItem="upS-AH-h1P" secondAttribute="top" id="RM6-wS-tif"/>
+                            <constraint firstItem="upS-AH-h1P" firstAttribute="bottom" secondItem="jKL-Av-bw1" secondAttribute="bottom" id="c1B-km-Z2y"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favs" image="star.leadinghalf.filled" catalog="system" id="ifQ-iX-p66"/>
+                    <navigationItem key="navigationItem" title="My Favourites" id="0cq-SV-OqO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rA-TP-oDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4677" y="483"/>
+        </scene>
+        <!--Favs-->
+        <scene sceneID="TLN-PQ-U3i">
+            <objects>
+                <navigationController id="QRC-uA-7Zu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favs" image="star.leadinghalf.filled" catalog="system" id="rIV-IH-DkH"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PTz-F9-qGR">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kJg-JC-65a" kind="relationship" relationship="rootViewController" id="tS7-6x-IHR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Izr-Oi-aZI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3719" y="483"/>
         </scene>
@@ -108,7 +153,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Lhb-5v-E4B" kind="relationship" relationship="viewControllers" id="QOa-iz-eHg"/>
-                        <segue destination="kJg-JC-65a" kind="relationship" relationship="viewControllers" id="OhD-WB-cB2"/>
+                        <segue destination="QRC-uA-7Zu" kind="relationship" relationship="viewControllers" id="6bx-Av-t77"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMq-ZS-Rha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

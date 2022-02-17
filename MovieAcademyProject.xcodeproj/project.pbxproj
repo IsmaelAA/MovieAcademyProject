@@ -10,6 +10,7 @@
 		281077C427BBBED50038DABE /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C327BBBED50038DABE /* UserDefaultsWorker.swift */; };
 		281077C627BBBF220038DABE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C527BBBF220038DABE /* APIService.swift */; };
 		281077C827BBD6C30038DABE /* FavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281077C727BBD6C30038DABE /* FavButton.swift */; };
+		28D743D627BE6BB100E8D6BB /* MovieSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D743D527BE6BB100E8D6BB /* MovieSearchBar.swift */; };
 		28DE54D027B3C51B0093095D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54CF27B3C51B0093095D /* AppDelegate.swift */; };
 		28DE54D227B3C51B0093095D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54D127B3C51B0093095D /* SceneDelegate.swift */; };
 		28DE54D427B3C51B0093095D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE54D327B3C51B0093095D /* HomeViewController.swift */; };
@@ -51,6 +52,7 @@
 		281077C327BBBED50038DABE /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
 		281077C527BBBF220038DABE /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		281077C727BBD6C30038DABE /* FavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavButton.swift; sourceTree = "<group>"; };
+		28D743D527BE6BB100E8D6BB /* MovieSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchBar.swift; sourceTree = "<group>"; };
 		28DE54CC27B3C51B0093095D /* MovieAcademyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieAcademyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DE54CF27B3C51B0093095D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28DE54D127B3C51B0093095D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,16 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
+		28D743D727BE6C2800E8D6BB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				28D743D527BE6BB100E8D6BB /* MovieSearchBar.swift */,
+				281077C727BBD6C30038DABE /* FavButton.swift */,
+				28F67DB427B519840068F687 /* MovieCollectionCell */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		28DE54C327B3C51B0093095D = {
 			isa = PBXGroup;
 			children = (
@@ -131,12 +143,12 @@
 		28DE54CE27B3C51B0093095D /* MovieAcademyProject */ = {
 			isa = PBXGroup;
 			children = (
+				28D743D727BE6C2800E8D6BB /* Components */,
 				281077C227BBBEC10038DABE /* Workers */,
 				28F67DC527B51E370068F687 /* ViewModels */,
 				28F67DC327B51D5B0068F687 /* CollectionViews */,
 				28F67DBC27B51A280068F687 /* Controllers */,
 				28F67DB727B519E50068F687 /* Models */,
-				28F67DB427B519840068F687 /* MovieCollectionCell */,
 				28DE54CF27B3C51B0093095D /* AppDelegate.swift */,
 				28DE54D127B3C51B0093095D /* SceneDelegate.swift */,
 				28DE54D527B3C51B0093095D /* HomeView.storyboard */,
@@ -144,7 +156,6 @@
 				28DE54DA27B3C51D0093095D /* LaunchScreen.storyboard */,
 				28DE54DD27B3C51D0093095D /* Info.plist */,
 				281077C527BBBF220038DABE /* APIService.swift */,
-				281077C727BBD6C30038DABE /* FavButton.swift */,
 			);
 			path = MovieAcademyProject;
 			sourceTree = "<group>";
@@ -356,6 +367,7 @@
 				28DE54D027B3C51B0093095D /* AppDelegate.swift in Sources */,
 				281077C827BBD6C30038DABE /* FavButton.swift in Sources */,
 				28F67DBE27B51A410068F687 /* MovieDetailViewController.swift in Sources */,
+				28D743D627BE6BB100E8D6BB /* MovieSearchBar.swift in Sources */,
 				28DE54D227B3C51B0093095D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

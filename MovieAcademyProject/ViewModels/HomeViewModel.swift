@@ -24,7 +24,6 @@ class HomeViewModel: HomeViewModelProtocol {
         }
     }
 
-
     init(apiService: APIServiceProtocol) {
         self.apiService = apiService
         self.movies = [Movie]()
@@ -34,8 +33,8 @@ class HomeViewModel: HomeViewModelProtocol {
         self.apiService.getMoviesByTitle(title: title, genre: genre, type: type, year: year) { results in
             self.movies = results.items
         } onError: { error in
-            print("Something was wrong :D")
+            print("Something was wrong at callFuncGetMoviesByTitle.")
+            print(error!)
         }
     }
-
 }

@@ -9,31 +9,38 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var homeSearchBar: UISearchBar!
+    @IBOutlet var homeSearchBar: MovieSearchBar!
     @IBOutlet weak var movieCollectionView: MovieCollectionView!
 
     let resultCellIdentifier = "kCollectionCell"
 
     var homeViewModel: HomeViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        homeSearchBar.viewController = self
         homeViewModel = HomeViewModel(apiService: APIService())
+        homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
 
-        homeViewModel.callFuncGetMoviesByTitle(title: "String", genre: "String", type: "String", year: "String")
-        
         let result = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
+        callToViewModelForUIUpdate()
     }
 
     func callToViewModelForUIUpdate() {
         self.homeViewModel.bindHomeViewModelToController = {
             DispatchQueue.main.async {
+                self.movieCollectionView.moviesData = self.homeViewModel.movies
                 self.movieCollectionView.reloadData()
             }
         }
     }
-
 }
 
+//extension HomeViewController: UISearchBarDelegate {
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        homeViewModel.callFuncGetMoviesByTitle(title: searchText, genre: "", type: "", year: "")
+//        callToViewModelForUIUpdate()
+//    }
+//}

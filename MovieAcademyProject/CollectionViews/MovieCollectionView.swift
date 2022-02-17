@@ -10,10 +10,13 @@ import UIKit
 
 class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    var moviesData: [Movie]!
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.dataSource = self
         self.delegate = self
+        self.moviesData = [Movie]()
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -21,19 +24,15 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return moviesData.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kCollectionCell", for: indexPath) as! MovieCollectionCell
         
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 2
-        
+        cell.loadMovie(movieToLoad: moviesData[indexPath.item])
+       
         return cell
-
     }
-
-
 }

@@ -8,33 +8,23 @@
 import Foundation
 
 protocol FavMoviesViewModelProtocol {
-    func callFuncGetMoviesByTitle(title: String, genre: String, type: String, year: String)
-    var bindHomeViewModelToController: (() -> Void) { get set }
-    var movies: [Movie] { get }
+    var bindFavMoviesViewModelToController: (() -> Void) { get set }
+    var movies: [MovieWithURL] { get }
 }
 
 class FavMoviesViewModel: FavMoviesViewModelProtocol {
+    private var defaultsWorker: UserDefaultsWorkerProtocol!
 
-    private var apiService: APIServiceProtocol!
-
-    var bindHomeViewModelToController: (() -> Void) = { }
-    private(set) var movies = [Movie]() {
+    var bindFavMoviesViewModelToController: (() -> Void) = { }
+    
+    private(set) var movies = [MovieWithURL]() {
         didSet {
-            self.bindHomeViewModelToController()
+            self.bindFavMoviesViewModelToController()
         }
     }
 
-    init(apiService: APIServiceProtocol) {
-        self.apiService = apiService
-        self.movies = [Movie]()
-    }
-
-    func callFuncGetMoviesByTitle(title: String, genre: String, type: String, year: String) {
-        self.apiService.getMoviesByTitle(title: title, genre: genre, type: type, year: year) { results in
-            self.movies = results.items
-        } onError: { error in
-            print("Something was wrong at callFuncGetMoviesByTitle.")
-            print(error!)
-        }
+    init(userDefaultsWorker: UserDefaultsWorker) {
+        self.defaultsWorker = userDefaultsWorker
+        self.movies = [MovieWithURL]()
     }
 }

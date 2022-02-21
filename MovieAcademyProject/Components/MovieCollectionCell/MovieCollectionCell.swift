@@ -14,13 +14,19 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet weak var movieLabel: UILabel!
     @IBOutlet weak var favButton: FavButton!
 
-    override func prepareForReuse() {
-        favButton.setBackgroundImage(UIImage(systemName: "star"), for: .normal)
-    }
+    var movieInCell: MovieWithURL!
 
-    func loadMovie(movieToLoad: Movie) {
-        movieLabel.text = movieToLoad.primaryTitle
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 2
+    func loadMovie() {
+        movieLabel.text = movieInCell.movie.primaryTitle
+
+        DispatchQueue.main.async {
+            guard let movieURL = self.movieInCell.movieURL else {
+                self.movieImage.image = UIImage.init(systemName: "film")
+                return
+            }
+            if let imageData: NSData = NSData(contentsOf: NSURL(string: movieURL)! as URL) {
+                self.movieImage.image = UIImage(data: imageData as Data)
+            }
+        }
     }
 }

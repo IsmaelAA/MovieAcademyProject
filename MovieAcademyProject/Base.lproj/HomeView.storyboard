@@ -89,8 +89,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="X9g-Xg-CVH">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jKL-Av-bw1" customClass="MovieCollectionView" customModule="MovieAcademyProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="139" width="414" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="eMo-uE-rut">
                                     <size key="itemSize" width="175" height="175"/>
@@ -113,17 +117,23 @@
                         <viewLayoutGuide key="safeArea" id="upS-AH-h1P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jKL-Av-bw1" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="9EG-VP-IPl"/>
-                            <constraint firstItem="jKL-Av-bw1" firstAttribute="trailing" secondItem="upS-AH-h1P" secondAttribute="trailing" id="K5N-et-KeR"/>
-                            <constraint firstItem="jKL-Av-bw1" firstAttribute="top" secondItem="upS-AH-h1P" secondAttribute="top" id="RM6-wS-tif"/>
-                            <constraint firstItem="upS-AH-h1P" firstAttribute="bottom" secondItem="jKL-Av-bw1" secondAttribute="bottom" id="c1B-km-Z2y"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="top" secondItem="X9g-Xg-CVH" secondAttribute="bottom" id="Bgp-OA-7tu"/>
+                            <constraint firstAttribute="trailing" secondItem="X9g-Xg-CVH" secondAttribute="trailing" id="WKr-zZ-AyS"/>
+                            <constraint firstItem="X9g-Xg-CVH" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="ciE-tb-NHJ"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="trailing" secondItem="upS-AH-h1P" secondAttribute="trailing" id="lrh-m6-49C"/>
+                            <constraint firstItem="X9g-Xg-CVH" firstAttribute="top" secondItem="upS-AH-h1P" secondAttribute="top" id="p6R-nG-0ZG"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="pxJ-eJ-byq"/>
+                            <constraint firstItem="jKL-Av-bw1" firstAttribute="bottom" secondItem="upS-AH-h1P" secondAttribute="bottom" id="wAq-cQ-GKk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Favourites" id="0cq-SV-OqO"/>
+                    <connections>
+                        <outlet property="favMoviesCollectionView" destination="jKL-Av-bw1" id="Rog-it-Ohm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rA-TP-oDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4677" y="483"/>
+            <point key="canvasLocation" x="4676.811594202899" y="482.8125"/>
         </scene>
         <!--Favs-->
         <scene sceneID="TLN-PQ-U3i">

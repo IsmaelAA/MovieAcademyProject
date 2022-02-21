@@ -10,13 +10,13 @@ import UIKit
 
 class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    var moviesData: [Movie]!
+    var moviesData: [MovieWithURL]!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.dataSource = self
         self.delegate = self
-        self.moviesData = [Movie]()
+        self.moviesData = [MovieWithURL]()
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -30,9 +30,10 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kCollectionCell", for: indexPath) as! MovieCollectionCell
-        
-        cell.loadMovie(movieToLoad: moviesData[indexPath.item])
-       
+
+        cell.movieInCell = moviesData[indexPath.item]
+        cell.loadMovie()
+
         return cell
     }
 }

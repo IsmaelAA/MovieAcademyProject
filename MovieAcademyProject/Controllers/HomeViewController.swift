@@ -21,13 +21,19 @@ class HomeViewController: UIViewController {
 
         homeSearchBar.viewController = self
         homeViewModel = HomeViewModel(apiService: APIService())
+        // Default empty query
         homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
 
         let result = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
         callToViewModelForUIUpdate()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
+        callToViewModelForUIUpdate()
+    }
+    
     func callToViewModelForUIUpdate() {
         self.homeViewModel.bindHomeViewModelToController = {
             DispatchQueue.main.async {

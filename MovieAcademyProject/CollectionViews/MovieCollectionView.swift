@@ -36,4 +36,12 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
 
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("me has pulsado")
+    }
+
+
+
 }
+

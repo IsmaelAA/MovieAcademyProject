@@ -14,6 +14,10 @@ struct Results: Codable, Equatable {
     let suggestions: [Suggestion]
 }
 
+struct Movies: Codable, Equatable {
+    
+}
+
 struct Movie: Codable, Equatable {
     let primaryTitle: String?
     let titleType: String?

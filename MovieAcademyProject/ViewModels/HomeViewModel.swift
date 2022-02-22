@@ -31,26 +31,19 @@ class HomeViewModel: HomeViewModelProtocol {
 
     func callFuncGetMoviesByTitle(title: String, genre: String, type: String, year: String) {
         self.apiService.getMoviesByTitle(title: title, genre: genre, type: type, year: year) { results in
-
             self.movies = [MovieWithURL]()
             for movie in results.items {
                 self.movies.append(MovieWithURL(movie: movie))
             }
-          
             for i in 0...self.movies.count - 1 {
                 self.apiService.getMovieImageURL(movieToLoad: self.movies[i]) { movieWithURL in
                     self.movies[i].movieURL = movieWithURL.movieURL
-                
                 } onError: { error in
                     print("Something was wrong at callFuncGetMoviesByTitle at getMovieImageURL.")
-                    print(error!)
                 }
             }
-
         } onError: { error in
             print("Something was wrong at callFuncGetMoviesByTitle.")
-            print(error!)
         }
     }
-
 }

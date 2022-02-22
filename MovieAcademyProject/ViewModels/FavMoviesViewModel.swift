@@ -10,13 +10,14 @@ import Foundation
 protocol FavMoviesViewModelProtocol {
     var bindFavMoviesViewModelToController: (() -> Void) { get set }
     var movies: [MovieWithURL] { get }
+    func callUserDefaultsLoadFavMovies()
 }
 
 class FavMoviesViewModel: FavMoviesViewModelProtocol {
+
     private var defaultsWorker: UserDefaultsWorkerProtocol!
 
     var bindFavMoviesViewModelToController: (() -> Void) = { }
-    
     private(set) var movies = [MovieWithURL]() {
         didSet {
             self.bindFavMoviesViewModelToController()
@@ -26,5 +27,11 @@ class FavMoviesViewModel: FavMoviesViewModelProtocol {
     init(userDefaultsWorker: UserDefaultsWorker) {
         self.defaultsWorker = userDefaultsWorker
         self.movies = [MovieWithURL]()
+    }
+
+    func callUserDefaultsLoadFavMovies() {
+        DispatchQueue.main.async {
+            self.movies = self.defaultsWorker.loadFavMovies()
+        }
     }
 }

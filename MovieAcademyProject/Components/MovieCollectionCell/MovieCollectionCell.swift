@@ -12,21 +12,31 @@ class MovieCollectionCell: UICollectionViewCell {
 
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieLabel: UILabel!
+    @IBOutlet weak var movieRating: UILabel!
     @IBOutlet weak var favButton: UIButton!
 
     var userDefaultsWorker = UserDefaultsWorker()
     var movieInCell: MovieWithURL!
     var favButPressed = false
 
-    func loadMovie() {
+    func loadMovie(movieInCell: MovieWithURL) {
+        self.movieInCell = movieInCell
 
         layer.borderWidth = 1
         layer.masksToBounds = false
         layer.borderColor = UIColor.gray.cgColor
-        layer.cornerRadius = layer.frame.height*0.05
+        layer.cornerRadius = layer.frame.height * 0.05
         clipsToBounds = true
+
+        movieLabel.text = " \(movieInCell.movie.primaryTitle!)"
         
-        movieLabel.text = movieInCell.movie.primaryTitle
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "star.square.fill")
+        let attachmentStr = NSAttributedString(attachment: attachment)
+        let ratingString = NSMutableAttributedString(string: " \(movieInCell.movie.averageRating!) ")
+        ratingString.append(attachmentStr)
+        movieRating.attributedText = ratingString
+
         movieImage.image = UIImage.init(systemName: "film")
         movieImage.contentMode = .scaleAspectFit
         if(self.userDefaultsWorker.isFavourite(self.movieInCell)) {
@@ -64,4 +74,6 @@ class MovieCollectionCell: UICollectionViewCell {
             favButton.setBackgroundImage(UIImage(systemName: "star"), for: .normal)
         }
     }
+
+
 }

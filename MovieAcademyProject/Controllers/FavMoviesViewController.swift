@@ -16,7 +16,7 @@ class FavMoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        favMoviesCollectionView.viewController = self
         favMoviesViewModel = FavMoviesViewModel(userDefaultsWorker: UserDefaultsWorker())
         favMoviesViewModel.callUserDefaultsLoadFavMovies()
         
@@ -37,5 +37,10 @@ class FavMoviesViewController: UIViewController {
                 self.favMoviesCollectionView.reloadData()
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let firstVC = segue.destination as? MovieDetailViewController else { return }
+        firstVC.movie = favMoviesCollectionView.selectedMovie
     }
 }

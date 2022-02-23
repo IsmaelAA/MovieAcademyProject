@@ -17,15 +17,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="175" height="275"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgl-l6-9bq">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Movie Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgl-l6-9bq">
                         <rect key="frame" x="0.0" y="254" width="175" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="film" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Hb4-8e-S0l">
-                        <rect key="frame" x="0.0" y="1" width="175" height="251.5"/>
+                        <rect key="frame" x="0.0" y="0.5" width="175" height="231.5"/>
                         <color key="tintColor" systemColor="linkColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="175" id="6tJ-FC-Ii0"/>
+                            <constraint firstAttribute="height" constant="233" id="KqK-hO-Ncu"/>
+                        </constraints>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="light"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-CD-xwf">
                         <rect key="frame" x="125" y="-0.5" width="50" height="50"/>
@@ -40,18 +45,24 @@
                             <action selector="touchFavButton:" destination="JqP-3h-0SE" eventType="touchUpInside" id="MJI-gR-nHI"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Rating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUo-Rm-MFj">
+                        <rect key="frame" x="0.0" y="233" width="175" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pgl-l6-9bq" firstAttribute="centerX" secondItem="tgg-LS-XKw" secondAttribute="centerX" id="BtB-jK-yx2"/>
                     <constraint firstItem="Hb4-8e-S0l" firstAttribute="leading" secondItem="tgg-LS-XKw" secondAttribute="leading" id="HnJ-Ta-WuX"/>
                     <constraint firstItem="Hb4-8e-S0l" firstAttribute="top" secondItem="tgg-LS-XKw" secondAttribute="top" id="IHK-Yg-5Na"/>
-                    <constraint firstItem="Hb4-8e-S0l" firstAttribute="centerX" secondItem="tgg-LS-XKw" secondAttribute="centerX" id="Jo2-61-JCU"/>
                     <constraint firstAttribute="trailing" secondItem="Hb4-8e-S0l" secondAttribute="trailing" id="LnX-mF-1pA"/>
                     <constraint firstAttribute="bottom" secondItem="pgl-l6-9bq" secondAttribute="bottom" id="Th8-nX-fvx"/>
                     <constraint firstItem="pgl-l6-9bq" firstAttribute="leading" secondItem="tgg-LS-XKw" secondAttribute="leading" id="V92-DS-NDP"/>
                     <constraint firstAttribute="trailing" secondItem="pgl-l6-9bq" secondAttribute="trailing" id="WwT-bs-OW2"/>
-                    <constraint firstItem="pgl-l6-9bq" firstAttribute="top" secondItem="Hb4-8e-S0l" secondAttribute="bottom" id="bHA-cs-eaK"/>
-                    <constraint firstItem="pgl-l6-9bq" firstAttribute="top" secondItem="Hb4-8e-S0l" secondAttribute="bottom" id="iXe-2N-B3B"/>
+                    <constraint firstItem="pgl-l6-9bq" firstAttribute="top" secondItem="kUo-Rm-MFj" secondAttribute="bottom" id="acH-GS-8or"/>
+                    <constraint firstItem="kUo-Rm-MFj" firstAttribute="leading" secondItem="tgg-LS-XKw" secondAttribute="leading" id="fKd-0W-TZn"/>
+                    <constraint firstItem="kUo-Rm-MFj" firstAttribute="top" secondItem="Hb4-8e-S0l" secondAttribute="bottom" id="l85-aR-XJA"/>
+                    <constraint firstAttribute="trailing" secondItem="kUo-Rm-MFj" secondAttribute="trailing" id="ps3-cz-X1E"/>
                     <constraint firstAttribute="trailing" secondItem="aZY-CD-xwf" secondAttribute="trailing" id="ybS-Fa-SLa"/>
                     <constraint firstItem="aZY-CD-xwf" firstAttribute="top" secondItem="tgg-LS-XKw" secondAttribute="top" id="zBh-4U-Lsd"/>
                 </constraints>
@@ -61,8 +72,9 @@
                 <outlet property="favButton" destination="aZY-CD-xwf" id="bLB-wS-0Db"/>
                 <outlet property="movieImage" destination="Hb4-8e-S0l" id="Ltc-3j-b3u"/>
                 <outlet property="movieLabel" destination="pgl-l6-9bq" id="Gzo-CT-RzG"/>
+                <outlet property="movieRating" destination="kUo-Rm-MFj" id="BuM-LM-QMA"/>
             </connections>
-            <point key="canvasLocation" x="1.4492753623188408" y="30.803571428571427"/>
+            <point key="canvasLocation" x="-2" y="20"/>
         </collectionViewCell>
     </objects>
     <resources>

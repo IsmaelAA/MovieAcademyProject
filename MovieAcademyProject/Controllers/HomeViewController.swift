@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class HomeViewController: UIViewController {
 
     @IBOutlet var homeSearchBar: MovieSearchBar!
@@ -20,6 +21,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         homeSearchBar.viewController = self
+        movieCollectionView.viewController = self
         homeViewModel = HomeViewModel(apiService: APIService())
         // Default empty query
         homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
@@ -28,12 +30,11 @@ class HomeViewController: UIViewController {
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
         callToViewModelForUIUpdate()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
         callToViewModelForUIUpdate()
     }
-    
+
     func callToViewModelForUIUpdate() {
         self.homeViewModel.bindHomeViewModelToController = {
             DispatchQueue.main.async {
@@ -41,5 +42,10 @@ class HomeViewController: UIViewController {
                 self.movieCollectionView.reloadData()
             }
         }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let firstVC = segue.destination as? MovieDetailViewController else { return }
+        firstVC.movie = movieCollectionView.selectedMovie
     }
 }

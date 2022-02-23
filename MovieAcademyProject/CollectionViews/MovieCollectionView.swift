@@ -11,6 +11,10 @@ import UIKit
 class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
 
     var moviesData: [MovieWithURL]!
+    var selectedMovie: MovieWithURL!
+
+    var viewController: UIViewController!
+    let reusableIdentifier = "kCollectionCell"
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,20 +32,18 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kCollectionCell", for: indexPath) as! MovieCollectionCell
-
-        cell.movieInCell = moviesData[indexPath.item]
-        cell.loadMovie()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MovieCollectionCell
+        cell.loadMovie(movieInCell: moviesData[indexPath.item])
 
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("me has pulsado")
+       
+        let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionCell
+        selectedMovie = cell.movieInCell
+//        print("Selected cell \(indexPath) with movie \(selectedMovie.movie.primaryTitle!)")
+        viewController.performSegue(withIdentifier: "showMovieDetail", sender: nil)
     }
-
-
-
 }
 

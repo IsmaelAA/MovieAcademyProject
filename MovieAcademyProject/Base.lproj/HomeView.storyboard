@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -34,9 +35,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Something new?" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu" customClass="MovieSearchBar" customModule="MovieAcademyProject">
-                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Something new?" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu" customClass="MovieSearchBar" customModule="MovieAcademyProject">
+                                <rect key="frame" x="50" y="88" width="364" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" id="Hb1-TE-ncy" customClass="MovieCollectionView" customModule="MovieAcademyProject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="144" width="414" height="664"/>
@@ -60,24 +65,51 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1t-nr-yzZ">
+                                <rect key="frame" x="0.0" y="88" width="50" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="9zL-GB-KBM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="list.bullet" catalog="system" symbolScale="small"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" cornerRadius="0.0" imageContentMode="scaleAspectFit" strokeWidth="0.0">
+                                        <imageReference key="image" image="tablecells.fill.badge.ellipsis" catalog="system" symbolScale="small"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="26"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="openFiltersView:" destination="LaQ-PQ-wwy" eventType="touchUpInside" id="8v9-Yh-uuB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1Kf-y9-WCy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Hb1-TE-ncy" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="4H1-by-qCm"/>
+                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="Caa-vU-FJj"/>
+                            <constraint firstItem="tKA-l1-tEu" firstAttribute="leading" secondItem="i1t-nr-yzZ" secondAttribute="trailing" id="K5f-ng-8fm"/>
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="trailing" secondItem="1Kf-y9-WCy" secondAttribute="trailing" id="NsE-uz-rY6"/>
-                            <constraint firstItem="tKA-l1-tEu" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="UQK-Nj-I1w"/>
                             <constraint firstItem="Hb1-TE-ncy" firstAttribute="top" secondItem="tKA-l1-tEu" secondAttribute="bottom" constant="5" id="WVY-JI-zBS"/>
                             <constraint firstItem="1Kf-y9-WCy" firstAttribute="bottom" secondItem="Hb1-TE-ncy" secondAttribute="bottom" constant="5" id="Y9a-GF-xfA"/>
                             <constraint firstItem="1Kf-y9-WCy" firstAttribute="trailing" secondItem="Hb1-TE-ncy" secondAttribute="trailing" id="afK-2i-xBo"/>
+                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="djx-io-zpY"/>
+                            <constraint firstItem="tKA-l1-tEu" firstAttribute="centerY" secondItem="i1t-nr-yzZ" secondAttribute="centerY" id="iWO-mW-51y"/>
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="jGm-Ug-6Xn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Academy Movies" id="mB9-Yo-bqx"/>
                     <connections>
+                        <outlet property="filtersButton" destination="i1t-nr-yzZ" id="1oW-BK-6y6"/>
                         <outlet property="homeSearchBar" destination="tKA-l1-tEu" id="xSh-3U-wOV"/>
                         <outlet property="movieCollectionView" destination="Hb1-TE-ncy" id="7S9-X4-B2M"/>
                         <segue destination="a9d-VE-I29" kind="show" identifier="showMovieDetail" id="rJt-Og-jtq"/>
+                        <segue destination="AiU-Ue-yhe" kind="show" identifier="showFiltersView" id="jXu-eA-VYf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nng-L0-fXb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -221,13 +253,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2PR-80-zYj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5832" y="100"/>
+            <point key="canvasLocation" x="5555" y="177"/>
         </scene>
         <!--Favs-->
         <scene sceneID="TLN-PQ-U3i">
             <objects>
                 <navigationController id="QRC-uA-7Zu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favs" image="star.leadinghalf.filled" catalog="system" id="rIV-IH-DkH"/>
+                    <tabBarItem key="tabBarItem" title="Favs" image="bookmark.square" catalog="system" id="rIV-IH-DkH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PTz-F9-qGR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -251,21 +283,54 @@
                     </tabBar>
                     <connections>
                         <segue destination="Lhb-5v-E4B" kind="relationship" relationship="viewControllers" id="QOa-iz-eHg"/>
-                        <segue destination="QRC-uA-7Zu" kind="relationship" relationship="viewControllers" id="6bx-Av-t77"/>
+                        <segue destination="QRC-uA-7Zu" kind="relationship" relationship="viewControllers" id="WgO-aL-28A"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMq-ZS-Rha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2768" y="178"/>
         </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="Yvh-ZL-Mmi">
+            <objects>
+                <viewController id="AiU-Ue-yhe" customClass="FiltersViewController" customModule="MovieAcademyProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mPE-fY-yf4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vgq-9F-rrP" customClass="FilterTableView" customModule="MovieAcademyProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tGt-MI-NIG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vgq-9F-rrP" firstAttribute="leading" secondItem="tGt-MI-NIG" secondAttribute="leading" id="3AN-g4-4bu"/>
+                            <constraint firstItem="vgq-9F-rrP" firstAttribute="top" secondItem="tGt-MI-NIG" secondAttribute="top" id="5GV-aO-Mxq"/>
+                            <constraint firstItem="tGt-MI-NIG" firstAttribute="trailing" secondItem="vgq-9F-rrP" secondAttribute="trailing" id="W8O-Gr-Shh"/>
+                            <constraint firstItem="tGt-MI-NIG" firstAttribute="bottom" secondItem="vgq-9F-rrP" secondAttribute="bottom" id="rDw-78-UVg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bD7-qv-nYk"/>
+                    <connections>
+                        <outlet property="filtersTable" destination="vgq-9F-rrP" id="0hd-Sb-tTh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3BF-v8-tWQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5554" y="-499"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="rJt-Og-jtq"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="bookmark.square" catalog="system" width="128" height="114"/>
         <image name="film" catalog="system" width="128" height="93"/>
         <image name="list.and.film" catalog="system" width="128" height="86"/>
-        <image name="star.leadinghalf.filled" catalog="system" width="128" height="116"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="tablecells.fill.badge.ellipsis" catalog="system" width="128" height="91"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

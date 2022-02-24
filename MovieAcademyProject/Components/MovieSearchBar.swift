@@ -16,25 +16,18 @@ class MovieSearchBar: UISearchBar, UISearchBarDelegate {
         super.init(coder: aDecoder)
         self.delegate = self
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if(!searchText.isEmpty) {
-            viewController.homeViewModel.callFuncGetMoviesByTitle(title: searchText, genre: "", type: "", year: "")
-        }else{
-            viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "") 
+            viewController.homeViewModel.callFuncGetMoviesByTitle(title: searchText)
+        } else {
+            viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a")
         }
         viewController.callToViewModelForUIUpdate()
     }
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        if(!searchBar.text!.isEmpty) {
-//            viewController.homeViewModel.callFuncGetMoviesByTitle(title: searchBar.text!, genre: "", type: "", year: "")
-//        }
-//        viewController.callToViewModelForUIUpdate()
-//    }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
+        viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a")
         viewController.callToViewModelForUIUpdate()
     }
 }

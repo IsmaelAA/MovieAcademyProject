@@ -22,31 +22,57 @@ class MovieCollectionCell: UICollectionViewCell {
     func loadMovie(movieInCell: MovieWithURL) {
         self.movieInCell = movieInCell
 
+        setCustomLayer()
+        
+        setMovieTitle()
+        setRating()
+        setFavButton()
+        setMovieImage()
+    }
+
+    func setCustomLayer(){
         layer.borderWidth = 1
         layer.masksToBounds = false
         layer.borderColor = UIColor.gray.cgColor
         layer.cornerRadius = layer.frame.height * 0.05
         clipsToBounds = true
-
+    }
+    
+    func setMovieTitle() {
         movieLabel.text = " \(movieInCell.movie.primaryTitle!)"
-        
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(systemName: "star.square.fill")
-        let attachmentStr = NSAttributedString(attachment: attachment)
-        let ratingString = NSMutableAttributedString(string: " \(movieInCell.movie.averageRating!) ")
-        ratingString.append(attachmentStr)
-        movieRating.attributedText = ratingString
+    }
 
-        movieImage.image = UIImage.init(systemName: "film")
-        movieImage.contentMode = .scaleAspectFit
-        if(self.userDefaultsWorker.isFavourite(self.movieInCell)) {
-            self.favButPressed = true
-            self.favButton.setBackgroundImage(UIImage(systemName: "star.fill"), for: .normal)
+    func setRating() {
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "star.fill")
+        attachment.image = attachment.image?.withTintColor(UIColor.systemYellow)
+        let attachmentStr = NSAttributedString(attachment: attachment)
+        let ratingString = NSMutableAttributedString(attributedString: attachmentStr)
+
+        if let averageRating = movieInCell.movie.averageRating {
+            ratingString.append(NSMutableAttributedString(string: " \(averageRating)"))
         } else {
-            self.favButPressed = false
-            self.favButton.setBackgroundImage(UIImage(systemName: "star"), for: .normal)
+            ratingString.append(NSMutableAttributedString(string: "Unspecified"))
         }
 
+        movieRating.attributedText = ratingString
+    }
+
+    func setFavButton() {
+        if(userDefaultsWorker.isFavourite(movieInCell)) {
+            favButPressed = true
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            favButton.tintColor = UIColor.systemBlue
+        } else {
+            favButPressed = false
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            favButton.tintColor = UIColor.darkGray
+        }
+    }
+
+    func setMovieImage() {
+        movieImage.image = UIImage.init(systemName: "film")
+        movieImage.contentMode = .scaleAspectFit
         if(movieInCell.movieURL != nil) {
             let identifier = movieInCell.movieURL
 
@@ -61,6 +87,9 @@ class MovieCollectionCell: UICollectionViewCell {
             }
             getDataTask.resume()
         }
+        else{
+            movieImage.image = UIImage.init(systemName: "film.fill")
+        }
     }
 
     @IBAction func touchFavButton(_ sender: Any) {
@@ -68,10 +97,12 @@ class MovieCollectionCell: UICollectionViewCell {
 
         if(favButPressed) {
             userDefaultsWorker.saveFavMovie(movieInCell)
-            favButton.setBackgroundImage(UIImage(systemName: "star.fill"), for: .normal)
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            favButton.tintColor = UIColor.systemBlue
         } else {
             userDefaultsWorker.removeFavMovie(movieInCell)
-            favButton.setBackgroundImage(UIImage(systemName: "star"), for: .normal)
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            favButton.tintColor = UIColor.darkGray
         }
     }
 

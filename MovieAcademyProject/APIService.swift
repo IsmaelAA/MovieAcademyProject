@@ -8,26 +8,35 @@
 import Foundation
 
 protocol APIServiceProtocol {
-    func getMoviesByTitle(title: String, genre: String, type: String, year: String, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?)
+    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?)
     func getMovieImageURL(movieToLoad: MovieWithURL, onSuccess: @escaping (MovieWithURL) -> Void, onError: ((_ error: Error?) -> Void)?)
 }
 
 class APIService: APIServiceProtocol {
 
     var task: URLSessionDataTask?
+    var taskImageLoad: URLSessionDataTask?
+    var numberOfResults = 20
 
-    func getMoviesByTitle(title: String, genre: String, type: String, year: String, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?) {
+    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?) {
         task?.cancel()
         var urlComponents = URLComponents(string: "http://localhost:8080/search")
 
-//        "localhost:8080/search?query=spiderman&genre=Action&type=Movie,tvEpisode&year=2000/2001,2008/2015"
+        urlComponents?.queryItems = [URLQueryItem.init(name: "query", value: title)]
 
-//        urlComponents.scheme = "https"
-//        urlComponents.host = "localhost:8080"
-//        urlComponents.path = "/search"
+        if genres != nil {
+            urlComponents?.queryItems?.append(URLQueryItem.init(name: "genre", value: genres!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
 
-        urlComponents?.queryItems = [URLQueryItem.init(name: "query", value: title), URLQueryItem.init(name: "rows", value: "20")]
-//                                     , URLQueryItem.init(name: "genre", value: genre), URLQueryItem.init(name: "type", value: type), URLQueryItem.init(name: "year", value: year)]
+        if types != nil {
+            urlComponents?.queryItems?.append(URLQueryItem.init(name: "type", value: types!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
+
+        if years != nil {
+            urlComponents?.queryItems?.append(URLQueryItem.init(name: "year", value: years!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
+
+        urlComponents?.queryItems?.append(URLQueryItem.init(name: "rows", value: "\(numberOfResults)"))
 
         guard let url = urlComponents?.url else { fatalError("Could not create URL from components") }
         var request = URLRequest(url: url)
@@ -61,9 +70,10 @@ class APIService: APIServiceProtocol {
         task?.resume()
     }
 
-    // API KEY
-    //https://api.themoviedb.org/3/movie/550?api_key=728cc58559e77ec7290c8798731010de
+// API KEY
+//https://api.themoviedb.org/3/movie/550?api_key=728cc58559e77ec7290c8798731010de
     func getMovieImageURL(movieToLoad: MovieWithURL, onSuccess: @escaping (MovieWithURL) -> Void, onError: ((_ error: Error?) -> Void)?) {
+        
         let urlString = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=728cc58559e77ec7290c8798731010de&language=en-US&query=" + movieToLoad.movie.primaryTitle!.replacingOccurrences(of: " ", with: "%20") + "&page=1&include_adult=false")
 
         guard let url = urlString else {
@@ -74,7 +84,7 @@ class APIService: APIServiceProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
-        task = URLSession.shared.dataTask(with: request) { data, response, error in
+        taskImageLoad = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                 let response = response as? HTTPURLResponse,
                 error == nil else { // check for fundamental networking error
@@ -95,7 +105,7 @@ class APIService: APIServiceProtocol {
             do {
                 let resultDTO = try decoder.decode(ResultsTMDB.self, from: data)
                 if(!resultDTO.results.isEmpty) {
-                    guard let posterPath = resultDTO.results[0].poster_path else { onSuccess(movieToLoad); return}
+                    guard let posterPath = resultDTO.results[0].poster_path else { onSuccess(movieToLoad); return }
                     onSuccess(MovieWithURL.init(movie: movieToLoad.movie, movieURL: "https://image.tmdb.org/t/p/original" + posterPath)) }
                 else {
                     onSuccess(movieToLoad)
@@ -104,6 +114,6 @@ class APIService: APIServiceProtocol {
                 onError?(error)
             }
         }
-        task?.resume()
+        taskImageLoad?.resume()
     }
 }

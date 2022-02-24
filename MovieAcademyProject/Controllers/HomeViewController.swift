@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet var homeSearchBar: MovieSearchBar!
     @IBOutlet weak var movieCollectionView: MovieCollectionView!
-
+    @IBOutlet weak var filtersButton: UIButton!
     let resultCellIdentifier = "kCollectionCell"
 
     var homeViewModel: HomeViewModel!
@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
         movieCollectionView.viewController = self
         homeViewModel = HomeViewModel(apiService: APIService())
         // Default empty query
-        homeViewModel.callFuncGetMoviesByTitle(title: "a", genre: "", type: "", year: "")
+        homeViewModel.callFuncGetMoviesByTitle(title: "a")
 
         let result = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
@@ -44,8 +44,17 @@ class HomeViewController: UIViewController {
         }
     }
 
+    @IBAction func openFiltersView(_ sender: Any) {
+        performSegue(withIdentifier: "showFiltersView", sender: nil)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let firstVC = segue.destination as? MovieDetailViewController else { return }
-        firstVC.movie = movieCollectionView.selectedMovie
+        if(segue.identifier == "showMovieDetail") {
+            guard let firstVC = segue.destination as? MovieDetailViewController else { return }
+            firstVC.movie = movieCollectionView.selectedMovie
+        } else {
+            guard let firstVC = segue.destination as? FiltersViewController else { return }
+            firstVC.homeViewModel = homeViewModel
+        }
     }
 }

@@ -45,5 +45,6 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
 //        print("Selected cell \(indexPath) with movie \(selectedMovie.movie.primaryTitle!)")
         viewController.performSegue(withIdentifier: "showMovieDetail", sender: nil)
     }
+    
 }
 

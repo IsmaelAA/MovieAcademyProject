@@ -35,8 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Something new?" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu" customClass="MovieSearchBar" customModule="MovieAcademyProject">
-                                <rect key="frame" x="50" y="88" width="364" height="51"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Something new?" translatesAutoresizingMaskIntoConstraints="NO" id="tKA-l1-tEu" customClass="MovieSearchBar" customModule="MovieAcademyProject">
+                                <rect key="frame" x="0.0" y="88" width="349" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -66,7 +66,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1t-nr-yzZ">
-                                <rect key="frame" x="0.0" y="88" width="50" height="51"/>
+                                <rect key="frame" x="349" y="93" width="50" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="9zL-GB-KBM"/>
                                 </constraints>
@@ -79,7 +79,7 @@
                                 </state>
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" cornerRadius="0.0" imageContentMode="scaleAspectFit" strokeWidth="0.0">
-                                        <imageReference key="image" image="tablecells.fill.badge.ellipsis" catalog="system" symbolScale="small"/>
+                                        <imageReference key="image" image="slider.horizontal.3" catalog="system" symbolScale="small"/>
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" type="system" pointSize="26"/>
                                 </buttonConfiguration>
@@ -92,14 +92,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Hb1-TE-ncy" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="4H1-by-qCm"/>
-                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="Caa-vU-FJj"/>
-                            <constraint firstItem="tKA-l1-tEu" firstAttribute="leading" secondItem="i1t-nr-yzZ" secondAttribute="trailing" id="K5f-ng-8fm"/>
-                            <constraint firstItem="tKA-l1-tEu" firstAttribute="trailing" secondItem="1Kf-y9-WCy" secondAttribute="trailing" id="NsE-uz-rY6"/>
+                            <constraint firstItem="tKA-l1-tEu" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="Nr9-Cf-AIm"/>
+                            <constraint firstItem="1Kf-y9-WCy" firstAttribute="trailing" secondItem="i1t-nr-yzZ" secondAttribute="trailing" constant="15" id="Uyn-Wg-dSO"/>
+                            <constraint firstItem="Hb1-TE-ncy" firstAttribute="top" secondItem="i1t-nr-yzZ" secondAttribute="bottom" constant="5" id="WPb-GI-ZPf"/>
                             <constraint firstItem="Hb1-TE-ncy" firstAttribute="top" secondItem="tKA-l1-tEu" secondAttribute="bottom" constant="5" id="WVY-JI-zBS"/>
                             <constraint firstItem="1Kf-y9-WCy" firstAttribute="bottom" secondItem="Hb1-TE-ncy" secondAttribute="bottom" constant="5" id="Y9a-GF-xfA"/>
                             <constraint firstItem="1Kf-y9-WCy" firstAttribute="trailing" secondItem="Hb1-TE-ncy" secondAttribute="trailing" id="afK-2i-xBo"/>
-                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="djx-io-zpY"/>
-                            <constraint firstItem="tKA-l1-tEu" firstAttribute="centerY" secondItem="i1t-nr-yzZ" secondAttribute="centerY" id="iWO-mW-51y"/>
+                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="leading" secondItem="tKA-l1-tEu" secondAttribute="trailing" id="b2S-Q3-sBi"/>
+                            <constraint firstItem="i1t-nr-yzZ" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" constant="5" id="g1C-LJ-IAz"/>
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="jGm-Ug-6Xn"/>
                         </constraints>
                     </view>
@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nng-L0-fXb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4677" y="-165"/>
+            <point key="canvasLocation" x="4676.811594202899" y="-165.40178571428569"/>
         </scene>
         <!--Fav Movies View Controller-->
         <scene sceneID="AnY-23-8sx">
@@ -124,12 +124,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="X9g-Xg-CVH">
-                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" id="jKL-Av-bw1" customClass="MovieCollectionView" customModule="MovieAcademyProject">
-                                <rect key="frame" x="0.0" y="139" width="414" height="674"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
@@ -154,11 +150,7 @@
                         <viewLayoutGuide key="safeArea" id="upS-AH-h1P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jKL-Av-bw1" firstAttribute="top" secondItem="X9g-Xg-CVH" secondAttribute="bottom" id="Bgp-OA-7tu"/>
-                            <constraint firstAttribute="trailing" secondItem="X9g-Xg-CVH" secondAttribute="trailing" id="WKr-zZ-AyS"/>
-                            <constraint firstItem="X9g-Xg-CVH" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="ciE-tb-NHJ"/>
                             <constraint firstItem="jKL-Av-bw1" firstAttribute="trailing" secondItem="upS-AH-h1P" secondAttribute="trailing" id="lrh-m6-49C"/>
-                            <constraint firstItem="X9g-Xg-CVH" firstAttribute="top" secondItem="upS-AH-h1P" secondAttribute="top" id="p6R-nG-0ZG"/>
                             <constraint firstItem="jKL-Av-bw1" firstAttribute="leading" secondItem="upS-AH-h1P" secondAttribute="leading" id="pxJ-eJ-byq"/>
                             <constraint firstItem="jKL-Av-bw1" firstAttribute="bottom" secondItem="upS-AH-h1P" secondAttribute="bottom" id="wAq-cQ-GKk"/>
                         </constraints>
@@ -171,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rA-TP-oDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4677" y="483"/>
+            <point key="canvasLocation" x="4676.811594202899" y="482.8125"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="Pbh-jF-Ryl">
@@ -330,7 +322,7 @@
         <image name="film" catalog="system" width="128" height="93"/>
         <image name="list.and.film" catalog="system" width="128" height="86"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
-        <image name="tablecells.fill.badge.ellipsis" catalog="system" width="128" height="91"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

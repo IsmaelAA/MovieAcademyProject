@@ -31,7 +31,9 @@ class FavMoviesViewModel: FavMoviesViewModelProtocol {
 
     func callUserDefaultsLoadFavMovies() {
         DispatchQueue.main.async {
-            self.movies = self.defaultsWorker.loadFavMovies()
+            self.movies = self.defaultsWorker.loadFavMovies().sorted{
+                $0.movie.primaryTitle! < $1.movie.primaryTitle!
+            }
         }
     }
 }

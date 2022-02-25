@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeViewModelProtocol {
-    func callFuncGetMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?)
+    func callFuncGetMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, dispatchGroup: DispatchGroup?)
     var bindHomeViewModelToController: (() -> Void) { get set }
     var movies: [MovieWithURL] { get }
     var aggregations: Aggregation { get set }
@@ -28,16 +28,17 @@ class HomeViewModel: HomeViewModelProtocol {
     init(apiService: APIServiceProtocol) {
         self.apiService = apiService
         self.movies = [MovieWithURL]()
-        self.aggregations = Aggregation.init(types: ["String": 0], ranges: ["String": 0], genres: ["String": 0])
+        self.aggregations = Aggregation.init()
     }
 
-    func callFuncGetMoviesByTitle(title: String, genres: [String]? = nil, types: [String]? = nil, years: [String]? = nil) {
+    func callFuncGetMoviesByTitle(title: String, genres: [String]? = nil, types: [String]? = nil, years: [String]? = nil, dispatchGroup: DispatchGroup? = nil) {
         self.apiService.getMoviesByTitle(title: title, genres: genres, types: types, years: years) { results in
             self.movies = [MovieWithURL]()
 
             for movie in results.items {
                 self.movies.append(MovieWithURL(movie: movie))
             }
+
             self.aggregations = results.aggregations
 
             let moviesNumber = self.movies.count
@@ -50,6 +51,9 @@ class HomeViewModel: HomeViewModelProtocol {
                     } onError: { error in
                         print("Something was wrong at callFuncGetMoviesByTitle at getMovieImageURL.")
                     }
+                }
+                if(dispatchGroup != nil) {
+                    dispatchGroup?.leave()
                 }
             }
         } onError: { error in

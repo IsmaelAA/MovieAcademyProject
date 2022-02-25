@@ -11,16 +11,15 @@ import UIKit
 class FilterTableCell: UITableViewCell {
 
     @IBOutlet weak var filterLabel: UILabel!
-    @IBOutlet weak var filterSwitch: UISwitch!
+    @IBOutlet weak var filterNumberLabel: UILabel!
+    @IBOutlet weak var buttonImage: UIImageView!
 
-    var viewModel: HomeViewModelProtocol!
-
-    func loadCell(viewModel: HomeViewModel, filterName: String, filterNumber: Int) {
+    var viewModel: FiltersViewModelProtocol!
+    var isEnabled = false
+    
+    func loadCell(viewModel: FiltersViewModelProtocol, filterName: String, filterNumber: Int) {
         self.viewModel = viewModel
-        filterLabel.text = "\(filterName) \(filterNumber)"
-    }
-
-    @IBAction func enableFilter(_ sender: Any) {
-
+        filterLabel.text = "\(filterName)"
+        filterNumberLabel.text = "(\(filterNumber))"
     }
 }

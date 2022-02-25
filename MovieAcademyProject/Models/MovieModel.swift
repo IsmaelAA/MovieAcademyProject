@@ -10,12 +10,12 @@ import Foundation
 struct Results: Codable, Equatable {
     let total: Int
     let items: [Movie]
-    let aggregations: Aggregation
+    var aggregations: Aggregation
     let suggestions: [Suggestion]
 }
 
 struct Movies: Codable, Equatable {
-    
+
 }
 
 struct Movie: Codable, Equatable {
@@ -54,9 +54,27 @@ struct PosterPath: Codable, Equatable {
 }
 
 struct Aggregation: Codable, Equatable {
-    let types: [String: Int]?
-    let ranges: [String: Int]?
-    let genres: [String: Int]?
+    var types: [String: Int]?
+    var ranges: [String: Int]?
+    var genres: [String: Int]?
+
+    init() {
+        self.types = [String: Int]()
+        self.ranges = [String: Int]()
+        self.genres = [String: Int]()
+    }
+}
+
+struct SelectedAggregation {
+    var types: [String]
+    var ranges: [String]
+    var genres: [String]
+
+    init() {
+        self.types = [String]()
+        self.ranges = [String]()
+        self.genres = [String]()
+    }
 }
 
 struct Suggestion: Codable, Equatable {

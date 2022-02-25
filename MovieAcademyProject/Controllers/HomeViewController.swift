@@ -16,23 +16,23 @@ class HomeViewController: UIViewController {
     let resultCellIdentifier = "kCollectionCell"
 
     var homeViewModel: HomeViewModel!
+    var filtersViewModel: FiltersViewModelProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         homeSearchBar.viewController = self
         movieCollectionView.viewController = self
         homeViewModel = HomeViewModel(apiService: APIService())
         // Default empty query
         homeViewModel.callFuncGetMoviesByTitle(title: "a")
-
+        
         let result = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
         callToViewModelForUIUpdate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        callToViewModelForUIUpdate()
+        self.callToViewModelForUIUpdate()
     }
 
     func callToViewModelForUIUpdate() {
@@ -54,7 +54,11 @@ class HomeViewController: UIViewController {
             firstVC.movie = movieCollectionView.selectedMovie
         } else {
             guard let firstVC = segue.destination as? FiltersViewController else { return }
-            firstVC.homeViewModel = homeViewModel
+            if(self.homeSearchBar.text!.isEmpty) {
+                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, titleToSearch: "a", apiService: APIService())
+            } else {
+                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, titleToSearch: self.homeSearchBar.text!, apiService: APIService())
+            }
         }
     }
 }

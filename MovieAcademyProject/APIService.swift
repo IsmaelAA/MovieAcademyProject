@@ -24,21 +24,22 @@ class APIService: APIServiceProtocol {
 
         urlComponents?.queryItems = [URLQueryItem.init(name: "query", value: title)]
 
-        if genres != nil {
+        if genres != nil && !genres!.isEmpty {
             urlComponents?.queryItems?.append(URLQueryItem.init(name: "genre", value: genres!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
         }
 
-        if types != nil {
+        if types != nil && !types!.isEmpty{
             urlComponents?.queryItems?.append(URLQueryItem.init(name: "type", value: types!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
         }
 
-        if years != nil {
+        if years != nil && !years!.isEmpty{
             urlComponents?.queryItems?.append(URLQueryItem.init(name: "year", value: years!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
         }
 
         urlComponents?.queryItems?.append(URLQueryItem.init(name: "rows", value: "\(numberOfResults)"))
 
         guard let url = urlComponents?.url else { fatalError("Could not create URL from components") }
+        print(url)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
-    var filtersViewController: FiltersViewController!
     var filtersViewModel: FiltersViewModelProtocol!
     var resultCellIdentifier = "kTableCell"
 
@@ -43,11 +42,11 @@ class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case Filters.genders.rawValue:
-            return filtersViewModel.aggregations.genres!.count
+            return filtersViewModel.aggregationsArray.genres.count
         case Filters.types.rawValue:
-            return filtersViewModel.aggregations.types!.count
+            return filtersViewModel.aggregationsArray.types.count
         case Filters.years.rawValue:
-            return filtersViewModel.aggregations.ranges!.count
+            return filtersViewModel.aggregationsArray.ranges.count
         default:
             return 0
         }
@@ -59,43 +58,33 @@ class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         }
 
         switch indexPath.section {
-
         case Filters.genders.rawValue:
-            let index = filtersViewModel.aggregations.genres!.index(filtersViewModel.aggregations.genres!.startIndex, offsetBy: indexPath.item)
-            cell.loadCell(viewModel: filtersViewModel, filterName: filtersViewModel.aggregations.genres![index].key, filterNumber: filtersViewModel.aggregations.genres![index].value)
-
+            cell.loadCell(filterName: filtersViewModel.aggregationsArray.genres[indexPath.item], filterNumber: filtersViewModel.aggregations.genres?[filtersViewModel.aggregationsArray.genres[indexPath.item]] ?? 0)
         case Filters.types.rawValue:
-            let index = filtersViewModel.aggregations.types!.index(filtersViewModel.aggregations.types!.startIndex, offsetBy: indexPath.item)
-            cell.loadCell(viewModel: filtersViewModel, filterName: filtersViewModel.aggregations.types![index].key, filterNumber: filtersViewModel.aggregations.types![index].value)
-
+            cell.loadCell(filterName: filtersViewModel.aggregationsArray.types[indexPath.item], filterNumber: filtersViewModel.aggregations.types?[filtersViewModel.aggregationsArray.types[indexPath.item]] ?? 0)
         case Filters.years.rawValue:
-            let index = filtersViewModel.aggregations.ranges!.index(filtersViewModel.aggregations.ranges!.startIndex, offsetBy: indexPath.item)
-            cell.loadCell(viewModel: filtersViewModel, filterName: filtersViewModel.aggregations.ranges![index].key, filterNumber: filtersViewModel.aggregations.ranges![index].value)
-
+            cell.loadCell(filterName: filtersViewModel.aggregationsArray.ranges[indexPath.item], filterNumber: filtersViewModel.aggregations.ranges?[filtersViewModel.aggregationsArray.ranges[indexPath.item]] ?? 0)
         default:
             return cell
         }
 
-
-        if(filtersViewModel.selectedAggregations.genres.contains(cell.filterLabel.text!) || filtersViewModel.selectedAggregations.types.contains(cell.filterLabel.text!) || filtersViewModel.selectedAggregations.ranges.contains(cell.filterLabel.text!)) {
+        if(filtersViewModel.selectedAggregations.genres.contains(cell.filterLabel.text!) || filtersViewModel.selectedAggregations.types.contains(cell.filterLabel.text!) || filtersViewModel.selectedAggregations.ranges.contains(cell.filterLabel.text!.replacingOccurrences(of: "-", with: "/"))) {
             cell.isEnabled = true
-            cell.buttonImage.image = UIImage(systemName: "circle.dashed.inset.filled")
         } else {
             cell.isEnabled = false
-            cell.buttonImage.image = UIImage(systemName: "circle.dashed")
         }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         guard let cell = tableView.cellForRow(at: indexPath) as? FilterTableCell else { return }
 
-        switch indexPath.section {
+        cell.isEnabled = !cell.isEnabled
 
+        switch indexPath.section {
         case Filters.genders.rawValue:
-            if(!cell.isEnabled) {
+            if(cell.isEnabled) {
                 filtersViewModel.selectedAggregations.genres.append(cell.filterLabel.text!)
             } else {
                 filtersViewModel.selectedAggregations.genres.removeAll(where: { string in
@@ -104,7 +93,7 @@ class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             }
 
         case Filters.types.rawValue:
-            if(!cell.isEnabled) {
+            if(cell.isEnabled) {
                 filtersViewModel.selectedAggregations.types.append(cell.filterLabel.text!)
             } else {
                 filtersViewModel.selectedAggregations.types.removeAll(where: { string in
@@ -113,7 +102,7 @@ class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             }
 
         case Filters.years.rawValue:
-            if(!cell.isEnabled) {
+            if(cell.isEnabled) {
                 filtersViewModel.selectedAggregations.ranges.append(cell.filterLabel.text!.replacingOccurrences(of: "-", with: "/"))
             } else {
                 filtersViewModel.selectedAggregations.ranges.removeAll(where: { string in
@@ -125,18 +114,20 @@ class FilterTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
             return
         }
 
-        if (!cell.isEnabled) {
-            cell.isEnabled = true
-            cell.buttonImage.image = UIImage(systemName: "circle.dashed.inset.filled")
-        } else {
-            cell.isEnabled = false
-            cell.buttonImage.image = UIImage(systemName: "circle.dashed")
+        filtersViewModel.callFuncGetMoviesAndAggregations(title: filtersViewModel.titleToSearch, genres: filtersViewModel.selectedAggregations.genres, types: filtersViewModel.selectedAggregations.types, ranges: filtersViewModel.selectedAggregations.ranges)
+        
+        var parentViewController: FiltersViewController? {
+            // Starts from next (As we know self is not a UIViewController).
+            var parentResponder: UIResponder? = self.next
+            while parentResponder != nil {
+                if let viewController = parentResponder as? FiltersViewController {
+                    return viewController
+                }
+                parentResponder = parentResponder?.next
+            }
+            return nil
         }
-
-
-        filtersViewModel.callFuncGetMoviesAndAggregations(title: filtersViewModel.titleToSearch, genres: filtersViewModel.selectedAggregations.genres, types: filtersViewModel.selectedAggregations.types, years: filtersViewModel.selectedAggregations.ranges)
-
-        filtersViewController.callToViewModelForUIUpdate()
-
+        
+        parentViewController?.callToViewModelForUIUpdate()
     }
 }

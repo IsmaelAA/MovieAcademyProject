@@ -10,17 +10,17 @@ import UIKit
 
 class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    var moviesData: [MovieWithURL]!
-    var selectedMovie: MovieWithURL!
+    var moviesData: [MovieWithURL]
+    var selectedMovie: MovieWithURL?
 
     var viewController: UIViewController!
     let reusableIdentifier = "kCollectionCell"
 
     required init?(coder aDecoder: NSCoder) {
+        self.moviesData = [MovieWithURL]()
         super.init(coder: aDecoder)
         self.dataSource = self
         self.delegate = self
-        self.moviesData = [MovieWithURL]()
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -39,12 +39,8 @@ class MovieCollectionView: UICollectionView, UICollectionViewDataSource, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
         let cell = collectionView.cellForItem(at: indexPath) as! MovieCollectionCell
         selectedMovie = cell.movieInCell
-//        print("Selected cell \(indexPath) with movie \(selectedMovie.movie.primaryTitle!)")
         viewController.performSegue(withIdentifier: "showMovieDetail", sender: nil)
     }
-    
 }
-

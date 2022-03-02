@@ -8,7 +8,7 @@
 import Foundation
 
 protocol APIServiceProtocol {
-    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?)
+    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, ranges: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?)
     func getMovieImageURL(movieToLoad: MovieWithURL, onSuccess: @escaping (MovieWithURL) -> Void, onError: ((_ error: Error?) -> Void)?)
 }
 
@@ -18,24 +18,12 @@ class APIService: APIServiceProtocol {
     var taskImageLoad: URLSessionDataTask?
     var numberOfResults = 20
 
-    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?) {
+    func getMoviesByTitle(title: String, genres: [String]?, types: [String]?, ranges: [String]?, onSuccess: @escaping (Results) -> Void, onError: ((_ error: Error?) -> Void)?) {
         task?.cancel()
         var urlComponents = URLComponents(string: "http://localhost:8080/search")
 
         urlComponents?.queryItems = [URLQueryItem.init(name: "query", value: title)]
-
-        if genres != nil && !genres!.isEmpty {
-            urlComponents?.queryItems?.append(URLQueryItem.init(name: "genre", value: genres!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
-        }
-
-        if types != nil && !types!.isEmpty{
-            urlComponents?.queryItems?.append(URLQueryItem.init(name: "type", value: types!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
-        }
-
-        if years != nil && !years!.isEmpty{
-            urlComponents?.queryItems?.append(URLQueryItem.init(name: "year", value: years!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
-        }
-
+        urlComponents?.queryItems?.append(contentsOf: getOptionalQueryItems(genres: genres, types: types, ranges: ranges))
         urlComponents?.queryItems?.append(URLQueryItem.init(name: "rows", value: "\(numberOfResults)"))
 
         guard let url = urlComponents?.url else { fatalError("Could not create URL from components") }
@@ -71,11 +59,28 @@ class APIService: APIServiceProtocol {
         task?.resume()
     }
 
-// API KEY
+    func getOptionalQueryItems(genres: [String]?, types: [String]?, ranges: [String]?) -> [URLQueryItem] {
+        var queryItems = [URLQueryItem]()
+
+        if genres != nil && !genres!.isEmpty {
+            queryItems.append(URLQueryItem.init(name: "genre", value: genres!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
+
+        if types != nil && !types!.isEmpty {
+            queryItems.append(URLQueryItem.init(name: "type", value: types!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
+
+        if ranges != nil && !ranges!.isEmpty {
+            queryItems.append(URLQueryItem.init(name: "year", value: ranges!.description.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "")))
+        }
+
+        return queryItems
+    }
+
+// API KEY SHOULD BE REMOVED FROM HERE IN THE FUTURE
 //https://api.themoviedb.org/3/movie/550?api_key=728cc58559e77ec7290c8798731010de
     func getMovieImageURL(movieToLoad: MovieWithURL, onSuccess: @escaping (MovieWithURL) -> Void, onError: ((_ error: Error?) -> Void)?) {
-        
-        let urlString = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=728cc58559e77ec7290c8798731010de&language=en-US&query=" + movieToLoad.movie.primaryTitle!.replacingOccurrences(of: " ", with: "%20") + "&page=1&include_adult=false")
+        let urlString = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=728cc58559e77ec7290c8798731010de&language=en-US&query=" + (movieToLoad.movie.primaryTitle?.replacingOccurrences(of: " ", with: "%20") ?? "a") + "&page=1&include_adult=false")
 
         guard let url = urlString else {
             onSuccess(movieToLoad)

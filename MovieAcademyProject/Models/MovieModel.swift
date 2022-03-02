@@ -14,10 +14,6 @@ struct Results: Codable, Equatable {
     let suggestions: [Suggestion]
 }
 
-struct Movies: Codable, Equatable {
-
-}
-
 struct Movie: Codable, Equatable {
     let primaryTitle: String?
     let titleType: String?
@@ -65,7 +61,7 @@ struct Aggregation: Codable, Equatable {
     }
 }
 
-struct SelectedAggregation {
+struct AggregationArray {
     var types: [String]
     var ranges: [String]
     var genres: [String]

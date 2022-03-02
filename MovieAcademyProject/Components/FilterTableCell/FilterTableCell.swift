@@ -14,11 +14,17 @@ class FilterTableCell: UITableViewCell {
     @IBOutlet weak var filterNumberLabel: UILabel!
     @IBOutlet weak var buttonImage: UIImageView!
 
-    var viewModel: FiltersViewModelProtocol!
-    var isEnabled = false
-    
-    func loadCell(viewModel: FiltersViewModelProtocol, filterName: String, filterNumber: Int) {
-        self.viewModel = viewModel
+    var isEnabled = false {
+        didSet {
+            if(isEnabled) {
+                buttonImage.image = UIImage(systemName: "circle.dashed.inset.filled")
+            } else {
+                buttonImage.image = UIImage(systemName: "circle.dashed")
+            }
+        }
+    }
+
+    func loadCell(filterName: String, filterNumber: Int) {
         filterLabel.text = "\(filterName)"
         filterNumberLabel.text = "(\(filterNumber))"
     }

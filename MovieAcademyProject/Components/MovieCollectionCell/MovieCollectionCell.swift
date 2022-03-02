@@ -23,21 +23,21 @@ class MovieCollectionCell: UICollectionViewCell {
         self.movieInCell = movieInCell
 
         setCustomLayer()
-        
+
         setMovieTitle()
         setRating()
         setFavButton()
         setMovieImage()
     }
 
-    func setCustomLayer(){
+    func setCustomLayer() {
         layer.borderWidth = 1
         layer.masksToBounds = false
         layer.borderColor = UIColor.gray.cgColor
-        layer.cornerRadius = layer.frame.height * 0.05
+        layer.cornerRadius = layer.frame.height * 0.02
         clipsToBounds = true
     }
-    
+
     func setMovieTitle() {
         movieLabel.text = " \(movieInCell.movie.primaryTitle!)"
     }
@@ -60,51 +60,68 @@ class MovieCollectionCell: UICollectionViewCell {
 
     func setFavButton() {
         if(userDefaultsWorker.isFavourite(movieInCell)) {
-            favButPressed = true
-            favButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            favButton.tintColor = UIColor.systemBlue
+            setFavButtonPressed(isPressed: true)
         } else {
-            favButPressed = false
-            favButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-            favButton.tintColor = UIColor.darkGray
+            setFavButtonPressed(isPressed: false)
         }
     }
 
     func setMovieImage() {
-        movieImage.image = UIImage.init(systemName: "film")
+        movieImage.image = UIImage.init(systemName: "arrow.triangle.2.circlepath")
         movieImage.contentMode = .scaleAspectFit
         if(movieInCell.movieURL != nil) {
-            let identifier = movieInCell.movieURL
-
-            let getDataTask = URLSession.shared.dataTask(with: URL(string: movieInCell.movieURL!)!) { data, _, error in guard let data = data, error == nil else {
-                return }
-                if(self.movieInCell.movieURL == identifier) {
-                    DispatchQueue.main.async {
-                        self.movieImage.image = UIImage(data: data)
-                        self.movieImage.contentMode = .scaleAspectFill
+            //let identifier = movieInCell.movieURL
+            if let url = movieInCell.movieURL {
+                let getDataTask = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in guard let data = data, error == nil else {
+                    return }
+                    if(self.movieInCell.movieURL == url) {
+                        DispatchQueue.main.async {
+                            self.movieImage.image = UIImage(data: data)
+                            self.movieImage.contentMode = .scaleAspectFill
+                        }
                     }
                 }
+                getDataTask.resume()
             }
-            getDataTask.resume()
         }
-        else{
-            movieImage.image = UIImage.init(systemName: "film.fill")
+        else {
+            movieImage.image = UIImage.init(systemName: "film")
+        }
+    }
+
+    func setFavButtonPressed(isPressed: Bool) {
+        favButPressed = isPressed
+        if(!favButPressed) {
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            favButton.tintColor = UIColor.darkGray
+        }
+        else {
+            favButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            favButton.tintColor = UIColor.systemBlue
         }
     }
 
     @IBAction func touchFavButton(_ sender: Any) {
-        favButPressed = !favButPressed
+        var parentViewController: FavMoviesViewController? {
+            // Starts from next (As we know self is not a UIViewController).
+            var parentResponder: UIResponder? = self.next
+            while parentResponder != nil {
+                if let viewController = parentResponder as? FavMoviesViewController {
+                    return viewController
+                }
+                parentResponder = parentResponder?.next
+            }
+            return nil
+        }
 
-        if(favButPressed) {
+        if(!favButPressed) {
             userDefaultsWorker.saveFavMovie(movieInCell)
-            favButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            favButton.tintColor = UIColor.systemBlue
+            setFavButtonPressed(isPressed: true)
         } else {
             userDefaultsWorker.removeFavMovie(movieInCell)
-            favButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-            favButton.tintColor = UIColor.darkGray
+            setFavButtonPressed(isPressed: false)
         }
+
+        parentViewController?.reloadView()
     }
-
-
 }

@@ -8,17 +8,20 @@
 import Foundation
 
 protocol HomeViewModelProtocol {
-    func callFuncGetMoviesByTitle(title: String, genres: [String]?, types: [String]?, years: [String]?, dispatchGroup: DispatchGroup?)
+    func callFuncGetMoviesByTitle(title: String, genres: [String]?, types: [String]?, ranges: [String]?, dispatchGroup: DispatchGroup?)
     var bindHomeViewModelToController: (() -> Void) { get set }
     var movies: [MovieWithURL] { get }
     var aggregations: Aggregation { get set }
+    var selectedAggregations: AggregationArray { get set }
 }
 
 class HomeViewModel: HomeViewModelProtocol {
     var aggregations: Aggregation
-    private var apiService: APIServiceProtocol!
+    var selectedAggregations: AggregationArray
+    private var apiService: APIServiceProtocol
 
     var bindHomeViewModelToController: (() -> Void) = { }
+   
     private(set) var movies = [MovieWithURL]() {
         didSet {
             self.bindHomeViewModelToController()
@@ -29,10 +32,11 @@ class HomeViewModel: HomeViewModelProtocol {
         self.apiService = apiService
         self.movies = [MovieWithURL]()
         self.aggregations = Aggregation.init()
+        self.selectedAggregations = AggregationArray.init()
     }
 
-    func callFuncGetMoviesByTitle(title: String, genres: [String]? = nil, types: [String]? = nil, years: [String]? = nil, dispatchGroup: DispatchGroup? = nil) {
-        self.apiService.getMoviesByTitle(title: title, genres: genres, types: types, years: years) { results in
+    func callFuncGetMoviesByTitle(title: String, genres: [String]? = nil, types: [String]? = nil, ranges: [String]? = nil, dispatchGroup: DispatchGroup? = nil) {
+        self.apiService.getMoviesByTitle(title: title, genres: genres, types: types, ranges: ranges) { results in
             self.movies = [MovieWithURL]()
 
             for movie in results.items {
@@ -40,7 +44,7 @@ class HomeViewModel: HomeViewModelProtocol {
             }
 
             self.aggregations = results.aggregations
-
+            
             let moviesNumber = self.movies.count
             if(moviesNumber > 0) {
                 for i in 0...moviesNumber - 1 {

@@ -72,7 +72,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
                                     <imageReference key="backgroundImage" image="list.bullet" catalog="system" symbolScale="small"/>
@@ -90,6 +90,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1Kf-y9-WCy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Hb1-TE-ncy" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="4H1-by-qCm"/>
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="leading" secondItem="1Kf-y9-WCy" secondAttribute="leading" id="Nr9-Cf-AIm"/>
@@ -102,6 +103,9 @@
                             <constraint firstItem="i1t-nr-yzZ" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" constant="5" id="g1C-LJ-IAz"/>
                             <constraint firstItem="tKA-l1-tEu" firstAttribute="top" secondItem="1Kf-y9-WCy" secondAttribute="top" id="jGm-Ug-6Xn"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="YTb-MK-yq5" appends="YES" id="Pva-xd-2Ek"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Academy Movies" id="mB9-Yo-bqx"/>
                     <connections>
@@ -113,6 +117,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nng-L0-fXb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="YTb-MK-yq5">
+                    <rectEdge key="edges" right="YES"/>
+                    <connections>
+                        <action selector="showFitlers:" destination="LaQ-PQ-wwy" id="LoJ-H7-MNf"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4676.811594202899" y="-165.40178571428569"/>
         </scene>
@@ -173,38 +183,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="film" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Krk-GQ-lRV">
-                                <rect key="frame" x="0.0" y="89" width="414" height="253.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.triangle.2.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Krk-GQ-lRV">
+                                <rect key="frame" x="0.0" y="88.5" width="414" height="255"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="256" id="cyT-JE-SPL"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YI-Z0-NrR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YI-Z0-NrR">
                                 <rect key="frame" x="20" y="364" width="102" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dal-yv-7iH">
-                                <rect key="frame" x="20" y="403" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UC5-cF-fgZ">
-                                <rect key="frame" x="20" y="439" width="55" height="21"/>
+                                <rect key="frame" x="20" y="403" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXh-bt-WOn">
-                                <rect key="frame" x="20" y="511" width="115" height="21"/>
+                                <rect key="frame" x="20" y="475" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runtime Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvJ-f9-INc">
-                                <rect key="frame" x="20" y="475" width="128" height="21"/>
+                                <rect key="frame" x="20" y="439" width="128" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -216,16 +220,13 @@
                             <constraint firstItem="iXh-bt-WOn" firstAttribute="top" secondItem="WvJ-f9-INc" secondAttribute="bottom" constant="15" id="1oF-F5-5Ar"/>
                             <constraint firstItem="aWZ-FJ-at2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iXh-bt-WOn" secondAttribute="trailing" symbolic="YES" id="9hG-45-dzA"/>
                             <constraint firstItem="UC5-cF-fgZ" firstAttribute="leading" secondItem="aWZ-FJ-at2" secondAttribute="leading" constant="20" id="Bpg-qC-qfz"/>
-                            <constraint firstItem="UC5-cF-fgZ" firstAttribute="top" secondItem="dal-yv-7iH" secondAttribute="bottom" constant="15" id="DFB-DZ-94L"/>
                             <constraint firstItem="aWZ-FJ-at2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1YI-Z0-NrR" secondAttribute="trailing" symbolic="YES" id="GJB-Xb-AJQ"/>
-                            <constraint firstItem="dal-yv-7iH" firstAttribute="leading" secondItem="aWZ-FJ-at2" secondAttribute="leading" constant="20" id="Hdj-ru-VFL"/>
                             <constraint firstItem="iXh-bt-WOn" firstAttribute="leading" secondItem="aWZ-FJ-at2" secondAttribute="leading" constant="20" id="NTi-8K-e1p"/>
-                            <constraint firstItem="aWZ-FJ-at2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dal-yv-7iH" secondAttribute="trailing" symbolic="YES" id="QdD-zv-mZP"/>
                             <constraint firstItem="1YI-Z0-NrR" firstAttribute="top" secondItem="Krk-GQ-lRV" secondAttribute="bottom" constant="20" id="RuO-4t-4ZH"/>
                             <constraint firstItem="Krk-GQ-lRV" firstAttribute="trailing" secondItem="aWZ-FJ-at2" secondAttribute="trailing" id="T9V-jd-fyH"/>
                             <constraint firstItem="WvJ-f9-INc" firstAttribute="top" secondItem="UC5-cF-fgZ" secondAttribute="bottom" constant="15" id="VlG-PU-I50"/>
-                            <constraint firstItem="dal-yv-7iH" firstAttribute="top" secondItem="1YI-Z0-NrR" secondAttribute="bottom" constant="15" id="aiW-Tc-Sd5"/>
                             <constraint firstItem="Krk-GQ-lRV" firstAttribute="top" secondItem="aWZ-FJ-at2" secondAttribute="top" id="ien-NI-W2B"/>
+                            <constraint firstItem="UC5-cF-fgZ" firstAttribute="top" secondItem="1YI-Z0-NrR" secondAttribute="bottom" constant="15" id="jux-4C-JPL"/>
                             <constraint firstItem="1YI-Z0-NrR" firstAttribute="leading" secondItem="aWZ-FJ-at2" secondAttribute="leading" constant="20" id="m65-ag-LKI"/>
                             <constraint firstItem="aWZ-FJ-at2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UC5-cF-fgZ" secondAttribute="trailing" symbolic="YES" id="qrb-WI-iOy"/>
                             <constraint firstItem="aWZ-FJ-at2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WvJ-f9-INc" secondAttribute="trailing" symbolic="YES" id="uUI-CI-qGZ"/>
@@ -239,7 +240,6 @@
                         <outlet property="movieImage" destination="Krk-GQ-lRV" id="OMV-wU-EcT"/>
                         <outlet property="movieRating" destination="iXh-bt-WOn" id="ZLw-OJ-TEd"/>
                         <outlet property="movieRuntimeMinutes" destination="WvJ-f9-INc" id="ojp-AG-1Um"/>
-                        <outlet property="movieStartYear" destination="dal-yv-7iH" id="3Pg-n0-0oY"/>
                         <outlet property="movieTitle" destination="1YI-Z0-NrR" id="qzS-vU-30R"/>
                     </connections>
                 </viewController>
@@ -247,11 +247,11 @@
             </objects>
             <point key="canvasLocation" x="5555" y="177"/>
         </scene>
-        <!--Favs-->
+        <!--My List-->
         <scene sceneID="TLN-PQ-U3i">
             <objects>
                 <navigationController id="QRC-uA-7Zu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favs" image="bookmark.square" catalog="system" id="rIV-IH-DkH"/>
+                    <tabBarItem key="tabBarItem" title="My List" image="bookmark.square" catalog="system" id="rIV-IH-DkH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PTz-F9-qGR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -275,7 +275,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Lhb-5v-E4B" kind="relationship" relationship="viewControllers" id="QOa-iz-eHg"/>
-                        <segue destination="QRC-uA-7Zu" kind="relationship" relationship="viewControllers" id="WgO-aL-28A"/>
+                        <segue destination="QRC-uA-7Zu" kind="relationship" relationship="viewControllers" id="hF4-vR-6Zt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMq-ZS-Rha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -318,8 +318,8 @@
         <segue reference="rJt-Og-jtq"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.triangle.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="bookmark.square" catalog="system" width="128" height="114"/>
-        <image name="film" catalog="system" width="128" height="93"/>
         <image name="list.and.film" catalog="system" width="128" height="86"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>

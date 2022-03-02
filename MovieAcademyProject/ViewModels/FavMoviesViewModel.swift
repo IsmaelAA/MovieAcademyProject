@@ -14,9 +14,8 @@ protocol FavMoviesViewModelProtocol {
 }
 
 class FavMoviesViewModel: FavMoviesViewModelProtocol {
-
-    private var defaultsWorker: UserDefaultsWorkerProtocol!
-
+    private var defaultsWorker: UserDefaultsWorkerProtocol
+    
     var bindFavMoviesViewModelToController: (() -> Void) = { }
     private(set) var movies = [MovieWithURL]() {
         didSet {
@@ -32,7 +31,7 @@ class FavMoviesViewModel: FavMoviesViewModelProtocol {
     func callUserDefaultsLoadFavMovies() {
         DispatchQueue.main.async {
             self.movies = self.defaultsWorker.loadFavMovies().sorted{
-                $0.movie.primaryTitle! < $1.movie.primaryTitle!
+                $0.movie.primaryTitle ?? "a" < $1.movie.primaryTitle ?? "b"
             }
         }
     }

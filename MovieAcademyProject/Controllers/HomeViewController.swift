@@ -9,14 +9,12 @@ import UIKit
 
 
 class HomeViewController: UIViewController {
-
     @IBOutlet var homeSearchBar: MovieSearchBar!
     @IBOutlet weak var movieCollectionView: MovieCollectionView!
     @IBOutlet weak var filtersButton: UIButton!
+    
     let resultCellIdentifier = "kCollectionCell"
-
     var homeViewModel: HomeViewModel!
-    var filtersViewModel: FiltersViewModelProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +23,7 @@ class HomeViewController: UIViewController {
         homeViewModel = HomeViewModel(apiService: APIService())
         // Default empty query
         homeViewModel.callFuncGetMoviesByTitle(title: "a")
-        
+
         let result = UINib(nibName: "MovieCollectionViewCell", bundle: nil)
         movieCollectionView.register(result, forCellWithReuseIdentifier: resultCellIdentifier)
         callToViewModelForUIUpdate()
@@ -44,8 +42,14 @@ class HomeViewController: UIViewController {
         }
     }
 
-    @IBAction func openFiltersView(_ sender: Any) {
+    @IBAction func openFiltersView(_ sender: UIButton) {
         performSegue(withIdentifier: "showFiltersView", sender: nil)
+    }
+
+    @IBAction func showFitlers(_ sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .recognized {
+            performSegue(withIdentifier: "showFiltersView", sender: nil)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,11 +58,19 @@ class HomeViewController: UIViewController {
             firstVC.movie = movieCollectionView.selectedMovie
         } else {
             guard let firstVC = segue.destination as? FiltersViewController else { return }
-            if(self.homeSearchBar.text!.isEmpty) {
-                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, titleToSearch: "a", apiService: APIService())
-            } else {
-                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, titleToSearch: self.homeSearchBar.text!, apiService: APIService())
-            }
+            
+            let titleToSearch = self.homeSearchBar.text!.isEmpty ? "a" : self.homeSearchBar.text!
+            firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel,
+                                                        selectedAggregations: homeViewModel.selectedAggregations,
+                                                        titleToSearch: titleToSearch,
+                                                        apiService: APIService()
+            )
+            
+//            if(self.homeSearchBar.text!.isEmpty) {
+//                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, selectedAggregations: homeViewModel.selectedAggregations, titleToSearch: "a", apiService: APIService())
+//            } else {
+//                firstVC.filtersViewModel = FiltersViewModel(homeViewModel: homeViewModel, selectedAggregations: homeViewModel.selectedAggregations, titleToSearch: self.homeSearchBar.text!, apiService: APIService())
+//            }
         }
     }
 }

@@ -23,11 +23,13 @@ class MovieSearchBar: UISearchBar, UISearchBarDelegate {
         } else {
             viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a")
         }
+        viewController.homeViewModel.selectedAggregations = AggregationArray.init()
         viewController.callToViewModelForUIUpdate()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewController.homeViewModel.callFuncGetMoviesByTitle(title: "a")
+        viewController.homeViewModel.selectedAggregations = AggregationArray.init()
         viewController.callToViewModelForUIUpdate()
     }
 }
